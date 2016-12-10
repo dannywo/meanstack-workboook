@@ -1,0 +1,11 @@
+#about-image {
+  border: 5px black solid;
+}
+
+#about h2 {
+  border-bottom: 2px solid black;
+}
+
+p {
+  text-indent: 40px;
+}
