@@ -25,14 +25,15 @@ app.set('views', path.resolve(__dirname, 'client', 'views'));
 
 app.use(express.static(path.resolve(__dirname, 'client')));
 
+// api.js router
+var api = express.Router();
+require('./server/routes/api')(api);
+app.use('/api', api);
+
 //Set our first route
 app.get('/*', function(req, res){
     res.render('index.ejs');
 });
-
-var api = express.Router();
-require('./server/routes/api')(api);
-app.use('/api', api);
 
 //Make our app listen for incoming requests on the port assigned above
 app.listen(port, function(){
