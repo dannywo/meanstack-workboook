@@ -30,9 +30,11 @@ var api = express.Router();
 require('./server/routes/api')(api);
 app.use('/api', api);
 
+
 //Set our first route
-app.get('/*', function(req, res){
+app.get('*', function(req, res){
     res.render('index.ejs');
+    // res.sendFile(__dirname + '/client/views/index.ejs');
 });
 
 //Make our app listen for incoming requests on the port assigned above

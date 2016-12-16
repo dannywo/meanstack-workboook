@@ -9,3 +9,11 @@
 p {
   text-indent: 40px;
 }
+
+tr.ng-enter {
+  animation: bounceInUp 1s;
+}
+
+tr.ng-leave {
+  animation: bounceOut 1s;
+}

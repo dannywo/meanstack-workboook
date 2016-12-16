@@ -1,4 +1,4 @@
-var myApp = angular.module('myApp', ['ngRoute', 'ui.bootstrap', 'ngResource']);
+var myApp = angular.module('myApp', ['ngRoute', 'ui.bootstrap', 'ngResource', 'ngAnimate']);
 
 myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider){
     $routeProvider.when('/home', {templateUrl: '/partials/home.html', controller: 'homeController'});

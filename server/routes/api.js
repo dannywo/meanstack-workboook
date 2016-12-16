@@ -3,7 +3,7 @@ var Customer = require('../models/customer');
 module.exports = function(router){
   
   //Post Customer
-  router.post('/customer', function(req, res){
+  router.post('/customers', function(req, res){
     console.log(req.body);
     var customer = new Customer();
     customer.firstname = req.body.firstname;
@@ -56,8 +56,8 @@ module.exports = function(router){
   });
   
   //Edit a customer
-  router.get('/customers/:id', function(req, res){
-    Customer.findOne({_id: req.params.id}, function(data){
+  router.post('/customers/:id', function(req, res){
+    Customer.findOne({_id: req.params.id}, function(err, data){
       var customer = data;
       customer.firstname = req.body.firstname;
       customer.lastname = req.body.lastname;
@@ -71,8 +71,7 @@ module.exports = function(router){
       //Save changes
       customer.save(function(err, data){
         if(err)
-          throw err;
-        console.log("error: " + err + " data:" +data);
+          throw err;  
         res.json(data);
       });
     });

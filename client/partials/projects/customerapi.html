@@ -43,7 +43,7 @@
           <th>Address</th>
           <th><i class="fa fa-trash" ng-click="deleteAll()"></i></th>
         </thead>
-        <tr ng-repeat="customer in customers | startFrom:(currentPage - 1) * pageSize | limitTo: pageSize">
+        <tr ng-repeat="customer in customers">
           <td>{{customer.lastname}}, {{customer.firstname}}</td>
           <td>{{customer.phone}}</td>
           <td>{{customer.address.street}}
@@ -51,7 +51,8 @@
             <br> {{customer.address.zip}}
           </td>
           <td>
-            <i class="fa fa-trash" ng-click="delete((currentPage - 1) * pageSize) + $index"></i>
+            <i class="fa fa-trash" 
+               ng-click="delete($index)"></i>
           </td>
         </tr>
       </table>
