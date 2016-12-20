@@ -2,6 +2,9 @@
 var express = require('express');
 var app = express();
 
+var http = require('http').Server(app);
+var io = require('socket.io')(http);
+
 //Native NodeJS module for resolving paths
 var path = require('path');
 
@@ -25,6 +28,14 @@ app.set('views', path.resolve(__dirname, 'client', 'views'));
 
 app.use(express.static(path.resolve(__dirname, 'client')));
 
+//socket.io logic
+io.on('connection', function(socket){
+    console.log('A user has connected.');
+    socket.on('disconnect', function(){
+        console.log('A user has disconnected');
+    });
+});
+
 // api.js router
 var api = express.Router();
 require('./server/routes/api')(api);
@@ -38,7 +49,7 @@ app.get('*', function(req, res){
 });
 
 //Make our app listen for incoming requests on the port assigned above
-app.listen(port, function(){
+http.listen(port, function(){
     console.log('Server running... PORT: ' + port);
 });
 
