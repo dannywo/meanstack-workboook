@@ -12,4 +12,9 @@ myApp.config(['$routeProvider', '$locationProvider', function($routeProvider, $l
     $routeProvider.otherwise({redirectTo: '/home'});
     
     $locationProvider.html5Mode({enabled: true, requireBase: false});
-}]);
+}])
+.filter('startFrom', function(){
+    return function(data, start){
+        return data.slice(start);
+    };
+});

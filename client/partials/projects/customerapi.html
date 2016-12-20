@@ -41,9 +41,9 @@
           <th>Name</th>
           <th>Phone</th>
           <th>Address</th>
-          <th><i class="fa fa-trash" ng-click="deleteAll()"></i></th>
+          <th><a href="#"><i class="fa fa-trash" ng-click="deleteAll()"></i></a></th>
         </thead>
-        <tr ng-repeat="customer in customers">
+        <tr ng-repeat="customer in customers | startFrom:(currentPage - 1) * pageSize | limitTo:pageSize">
           <td>{{customer.lastname}}, {{customer.firstname}}</td>
           <td>{{customer.phone}}</td>
           <td>{{customer.address.street}}
@@ -51,12 +51,12 @@
             <br> {{customer.address.zip}}
           </td>
           <td>
-            <i class="fa fa-trash" 
-               ng-click="delete($index)"></i>
+            <a href="#"><i class="fa fa-trash" 
+               ng-click="delete((currentPage - 1) * pageSize + $index)"></i></a>
           </td>
         </tr>
       </table>
     </div>
-    <pagination total-items="customers.length" ng-model="currentPage" items-per-page="pageSize"></pagination>
+    <ul uib-pagination total-items="customers.length" ng-model="currentPage" items-per-page="pageSize"></ul>
   </div>
 </div>

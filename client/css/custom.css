@@ -11,9 +11,9 @@ p {
 }
 
 tr.ng-enter {
-  animation: bounceInUp 1s;
+  animation: bounceInRight 1s;
 }
 
 tr.ng-leave {
-  animation: bounceOut 1s;
+  animation: bounceOutRight 0s;
 }
