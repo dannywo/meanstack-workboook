@@ -1,1 +1,26 @@
-Chat app here.
+<div class="row">
+  <div class="col-md-8 chat-window">
+    <ul>
+      <li ng-repeat="message in messages">
+        <span class="username">{{message.username}}</span>
+        <span class="message">{{message.message}}</span>
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-4 user-window">
+    <li ng-repeat="user in users">{{user}}</li>
+  </div>
+</div>
+<div class="row">
+  <form class="form-horizontal">
+    <div class="form-group">
+      <label for="chatInput"></label>
+      <div class="col-md-8">
+        <input type="text"class="form-control" id="chatInput" placeholder="Enter text here..." ng-model="msg">
+      </div>
+      <div class="col-md-3">
+        <button type="button" class="btn btn-primary" ng-click="sendMessage(msg)">Send Message</button>
+      </div>
+    </div>
+  </form>
+</div>

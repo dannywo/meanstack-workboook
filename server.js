@@ -29,10 +29,36 @@ app.set('views', path.resolve(__dirname, 'client', 'views'));
 app.use(express.static(path.resolve(__dirname, 'client')));
 
 //socket.io logic
+var users = [];
 io.on('connection', function(socket){
     console.log('A user has connected.');
+    var username = '';
+    
+    socket.on('request-users', function() {
+        socket.emit('users', {users: users});
+    });
+    
+    //Send messages to all users connected
+    socket.on('message', function(data){
+        io.emit('message', {username: username, message: data.message});
+    });
+    
+    //Remove user for user array and emit user that disconnected
     socket.on('disconnect', function(){
-        console.log('A user has disconnected');
+        console.log(username + ' has disconnected');
+        users.splice(users.indexOf(username), 1);
+        io.emit('remove-user', {username: username});
+    });
+    
+    //Add usernames
+    socket.on('add-user', function(data){
+        if(users.indexOf(data.username == -1)){
+            io.emit('add-user', {username: data.username});
+            username = data.username;
+            users.push(data.username);
+        } else {
+            socket.emit('prompt-username', {message: 'User already exists'});
+        }
     });
 });
 
